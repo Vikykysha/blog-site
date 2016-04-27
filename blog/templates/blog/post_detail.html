@@ -31,6 +31,24 @@
         </div>
 </div>
            <div>
+                      <p>
+
+<strong id="like_count">{{ post.likes }}</strong> people like this post
+{% if user.is_authenticated %}
+             
+        {% if not post.addLike%}    
+<a class="btn btn-default" id = "likes" href="{% url 'like_category' pk=post.pk %}">
+       
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+        Like
+  
+        
+</a>
+             <p>
+                {% else %}
+           
+{% endif %}
+                {% endif %}
 
 <div class = "comments">
 <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>

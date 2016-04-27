@@ -5,14 +5,12 @@ from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
-    # This line is required. Links UserProfile to a User model instance.
+   
     user = models.OneToOneField(User,null=True, blank=True)
-
-    # The additional attributes we wish to include.
     website = models.URLField(blank=True, null=True)
-    hobby = models.TextField(blank=True, null=True)
-
-    # Override the __unicode__() method to return out something meaningful!
+    
+    hobby = models.CharField(blank=True, null=True, max_length=200)
+    
     def __unicode__(self):
         return self.user.username
 
@@ -26,6 +24,8 @@ class Post(models.Model):
     published_date = models.DateTimeField(blank=True, null=True)
     category = models.ForeignKey ('Category',blank=True, null=True)
     tags = models.ForeignKey('Tag',blank=True, null=True)
+    likes  = models.BigIntegerField(blank = True, default = 0)
+    addLike = models.IntegerField(default = 0)
 
     def approved_comment (self):
         return self.comments.filter(approved_comment = True)

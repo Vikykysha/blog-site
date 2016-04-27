@@ -16,6 +16,7 @@ urlpatterns = [
    url(r'^blog/profile/$', views.profile, name='profile'),
    url(r'^bloggers/$', views.bloggers, name='bloggers'),
    url(r'^categories/$', views.categories, name='categories'),
+   url(r'^post/(?P<pk>\d+)/like_category$', views.like_category, name='like_category'),
     
  
 ]
