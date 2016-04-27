@@ -9,6 +9,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from blog.forms import UserForm, UserProfileForm
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.contrib.auth.models import User
 
 def register(request):
     # Like before, get the request's context.
@@ -28,13 +29,15 @@ def register(request):
         # If the two forms are valid...
         if user_form.is_valid() and profile_form.is_valid():
             # Save the user's form data to the database.
+        
+            
             user = user_form.save()
-
+            
             # Now we hash the password with the set_password method.
             # Once hashed, we can update the user object.
             user.set_password(user.password)
             user.save()
-
+            
             # Now sort out the UserProfile instance.
             # Since we need to set the user attribute ourselves, we set commit=False.
             # This delays saving the model until we're ready to avoid integrity problems.
@@ -44,9 +47,11 @@ def register(request):
 
             # Now we save the UserProfile model instance.
             profile.save()
+            
 
             # Update our variable to tell the template registration was successful.
             registered = True
+            
 
         # Invalid form or forms - mistakes or something else?
         # Print problems to the terminal.

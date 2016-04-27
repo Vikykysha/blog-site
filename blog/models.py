@@ -6,11 +6,11 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User,null=True, blank=True)
 
     # The additional attributes we wish to include.
-    website = models.URLField(blank=True)
-    hobby = models.TextField()
+    website = models.URLField(blank=True, null=True)
+    hobby = models.TextField(blank=True, null=True)
 
     # Override the __unicode__() method to return out something meaningful!
     def __unicode__(self):

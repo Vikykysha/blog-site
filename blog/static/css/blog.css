@@ -7,13 +7,27 @@ body {
 .comment {
     margin: 20px 0px 20px 20px;
 }
-
+a:hover {
+   color: #FCA205;
+   text-decoration: none; 
+}
 
 h1 a {
    color: #FCA205;
    font-family: 'Indie Flower', cursive;
     }
-
+.profile-class {
+      color: black;
+   font-family: 'Bangers', cursive;
+}
+.profile-class:hover {
+   color: #FCA205;
+   text-decoration: none; 
+}
+.profile-class:visited {
+ color: black;
+   font-family: 'Bangers', cursive;
+}
 
 .page-header {
    background-color: #f08166;
