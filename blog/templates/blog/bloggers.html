@@ -2,17 +2,17 @@
 
 {% block content %}
 
-   <table class="table table-hover table-condensed">
+   <table class="table table-hover table-condensed table-for-user-list">
  <thead>
  <tr>
- <th>Your name</th>
+ <th>Name</th>
  <th>Email</th>
  <th>Last visited</th>
     <th>Login Date</th>
-    <th>Your hobbies</th>
+    <th>Hobbies</th>
  </tr>
  </thead>
-      {% for user in users %}
+      {% for user, profs in list %}
      
  <tbody>
  <tr>
@@ -21,8 +21,8 @@
  <td>{{user.last_login}}</td>
     <td>{{user.date_joined}}</td>
     
-    <td> {{prof.hobby}}</td>
-          
+    <td> {{profs.hobby}}</td>
+           
  </tr>
 
  </tbody>

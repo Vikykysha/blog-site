@@ -80,6 +80,7 @@ def profile(request):
 def bloggers(request):
    users = User.objects.order_by('id')
    prof = UserProfile.objects.order_by('user_id')
+   list = zip(users, prof)
    paginator = Paginator(users,60)
    page = request.GET.get('page')
    try:
@@ -88,7 +89,7 @@ def bloggers(request):
       users = paginator.page(1)
    except EmptyPage:
       users = paginator.page(paginator.num_pages)                               
-   return render(request,'blog/bloggers.html',{'users':users, 'prof':prof})
+   return render(request,'blog/bloggers.html',{'users':users, 'prof':prof, 'list':list})
 
 def post_list(request):
    posts = Post.objects.order_by('-created_date')

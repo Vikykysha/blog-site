@@ -12,14 +12,15 @@
 {% endif %}
            </div>
            <div class="main-menu">
-           {% if user.is_authenticated %}
+           {% if request.user = post.author or user.is_superuser %}
+              
            <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
            <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-           {% else %}
-           <a href="{% url 'django.contrib.auth.views.login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+           
            {% endif %}
           <div class="includ-post">
                  <h1 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                  <p>{{ post.author}}</a></p>
            <hr>
               
            <div class="pull-right bg-info" style="width: 20em; padding: 10px;">
@@ -34,7 +35,9 @@
 <div class = "comments">
 <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
 
-
+<br>
+   <br>
+   <br>
 {% for comment in post.comments.all %}
 </div>
     {% if user.is_authenticated or comment.approved_comment %}
@@ -57,6 +60,6 @@
     </div>
     {% endif %}
 {% empty %}
-    <p>No comments here yet :(</p>
+    <p><span class=" glyphicon glyphicon-fire"></span>No comments here yet <span class=" glyphicon glyphicon-fire"></p>
 {% endfor %}
     {% endblock %}
