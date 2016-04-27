@@ -23,9 +23,12 @@
     <div class="content">
        <div class="row two">
          
-             <div class="col-sm-4">See your <a href="/blog/profile/" class="options">profile</a></div>
+             <div class="col-sm-4">{% if user.is_authenticated %}See your <a href="/blog/profile/" class="options">profile</a>{% else %}
+          Haven't loggined yet?! <a href="{% url 'django.contrib.auth.views.login' %}" class="options" >Do it now!<br> </a> Or  <a href="{% url 'register' %}" class="options"> register</a>
+           {% endif %}
+          </div>
             <div class="col-sm-4">See other <a href="/bloggers/" class="options">bloggers</a></div>
-            <div class="col-sm-4">See different categories</div>
+            <div class="col-sm-4">See different <a href="/categories/" class="options">categories</a></div>
              
         </div>
         <div class="row">

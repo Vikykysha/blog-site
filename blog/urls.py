@@ -15,6 +15,7 @@ urlpatterns = [
    url(r'^blog/register/$', views.register, name='register'),
    url(r'^blog/profile/$', views.profile, name='profile'),
    url(r'^bloggers/$', views.bloggers, name='bloggers'),
+   url(r'^categories/$', views.categories, name='categories'),
     
  
 ]

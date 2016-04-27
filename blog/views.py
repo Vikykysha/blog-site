@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from .models import Post, Comment, UserProfile
+from .models import Post, Comment, UserProfile, Category
 from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -106,6 +106,10 @@ def post_list(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
+
+def categories(request):
+   cats = Category.objects.order_by('name')
+   return render(request, 'blog/categories.html', {'cats':cats})
 
 @login_required
 def post_new(request):
