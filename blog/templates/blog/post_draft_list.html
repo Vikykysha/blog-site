@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <p class="date">created: {{ post.created_date|date:'d-m-Y' }}</p>
+            <h1 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p class="post-text">{{ post.text|linebreaks }}</p>
+            <p class = "category"> Category: {{ post.category}} <p>
+            
+        </div>
+    {% endfor %}
+
+<div class="pagination">
+ 
+    {% if posts.has_previous %}
+        <a href="?page={{ posts.previous_page_number }}">←</a>
+    {% endif %}
+ 
+    {% for num in posts.paginator.page_range %}
+        {% if num == posts.number %}
+            <span class="current"><b>{{ num }}</b></span>
+        {% else %}
+            <a href="?page={{ num }}"> {{ num }}</a>
+        {% endif %} 
+    {% endfor %}
+ 
+    {% if posts.has_next %}
+        <a href="?page={{ posts.next_page_number }}"> → </a>
+    {% endif %}
+ 
+</div>
+
+{% endblock %}

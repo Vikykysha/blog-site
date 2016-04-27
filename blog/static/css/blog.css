@@ -1,0 +1,127 @@
+
+body {
+    padding-left: 15px;
+    }
+
+
+.comment {
+    margin: 20px 0px 20px 20px;
+}
+
+
+h1 a {
+   color: #FCA205;
+   font-family: 'Indie Flower', cursive;
+    }
+
+
+.page-header {
+   background-color: #f08166;
+   margin-top: 0;
+   padding: 20px 20px 20px 40px;
+    }
+
+
+.content {
+   margin-left: 40px; 
+    }
+
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+   color: #ffffff;
+   font-size: 36pt;
+   text-decoration: none;
+    }
+
+.post {
+   border-bottom: 2px dashed #e5bcb5;
+  margin-bottom:90px;
+}
+
+
+
+h1, h2, h3, h4 {
+        font-family: 'Indie Flower', cursive;
+    }
+
+.top-menu {
+   font-family: 'Bangers', cursive;
+   font-size: 30px;
+   float: right;
+  
+}
+.authoraze {
+   margin-left:20px;
+}
+   
+.pull-right{
+    color: black;
+    font-size:13px;
+   font-family: 'Bangers', cursive;
+   background-color:#f08166;
+
+}
+.addcomm {
+   margin:60px 80px;
+}
+strong {
+    font-family: 'Bangers', cursive;
+    font-size:25px;
+}
+.comment-content {
+   margin-left:40px;
+   margin-bottom:20px;
+}
+.comment-content p {
+ font-family:  'Indie Flower', cursive;
+   font-size:20px;
+}
+.date, .category, .tag {
+   float: right;
+   color: #828282;
+  font-family: 'Bangers', cursive;
+       
+    }
+.tag {
+   font-size: 10px;
+}
+h1.title a {
+   color: black;
+   font-family: 'Indie Flower', cursive;
+   font-size:30px;
+}
+
+.post a {
+   font-family: 'Indie Flower', cursive;
+   color:#f08166;
+   font-size:15px;
+}
+strong + a {
+   font-family: 'Indie Flower', cursive;
+   color:#f08166;
+   font-size:15px;
+   display:block;
+}
+
+.glyphicon  {
+   color: black;
+  
+}
+small a {
+     color: black;
+   float:right;
+   padding-left:10px;
+   font-size:12px;
+} 
+
+.current {
+   color:#828282
+}
+
+.pagination a{
+  color: #f08166
+}
+   
+   
+   
+   
