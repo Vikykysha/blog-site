@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+
    <table class="table table-hover table-condensed">
  <thead>
  <tr>
@@ -11,16 +12,27 @@
     <th>Your hobbies</th>
  </tr>
  </thead>
+      {% for user in users %}
+     
  <tbody>
  <tr>
  <td>{{user.username}}</td>
  <td>{{user.email}}</td>
  <td>{{user.last_login}}</td>
     <td>{{user.date_joined}}</td>
-    <td>{{profile.hobby}}</td>
+    
+    <td> {{prof.hobby}}</td>
+          
  </tr>
 
  </tbody>
+     
+      {% endfor %}
  </table>
-           
+
+
+
+
+
+
 {% endblock %}

@@ -105,7 +105,9 @@ h1.title a {
    font-size:30px;
 }
 
-.post a {
+.post a,
+.col-sm-4,
+.options {
    font-family: 'Indie Flower', cursive;
    color:#f08166;
    font-size:15px;
@@ -134,6 +136,27 @@ small a {
 
 .pagination a{
   color: #f08166
+}
+table {
+ margin:40px;
+   border: 2px dashed #e5bcb5;
+}
+th {
+   color: black;
+   font-family: 'Bangers', cursive;
+   font-size:20px;
+}
+td {
+  font-family: 'Indie Flower', cursive;
+   color:#f08166;
+   font-size:20px 
+}
+.two {
+   border-bottom:2px dashed #e5bcb5;
+}
+.col-sm-4 {
+ border-right:  2px dashed #e5bcb5;
+   text-align:center;
 }
    
    

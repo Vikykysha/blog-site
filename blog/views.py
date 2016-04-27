@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from .models import Post, Comment
+from .models import Post, Comment, UserProfile
 from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -72,7 +72,23 @@ def register(request):
             context)
    
 def profile(request):
-   return render(request, 'blog/profile.html')
+   user = request.user
+   user_id  = user.id  
+   profile = UserProfile.objects.get(user_id = user_id)
+   return render(request, 'blog/profile.html',{'profile':profile})
+
+def bloggers(request):
+   users = User.objects.order_by('id')
+   prof = UserProfile.objects.order_by('user_id')
+   paginator = Paginator(users,60)
+   page = request.GET.get('page')
+   try:
+      users = paginator.page(page)
+   except InvalidPage:
+      users = paginator.page(1)
+   except EmptyPage:
+      users = paginator.page(paginator.num_pages)                               
+   return render(request,'blog/bloggers.html',{'users':users, 'prof':prof})
 
 def post_list(request):
    posts = Post.objects.order_by('-created_date')

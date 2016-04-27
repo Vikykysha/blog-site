@@ -14,6 +14,7 @@ urlpatterns = [
    url(r'^post/(?P<pk>\d+)/remove/$', views.post_remove, name='post_remove'),
    url(r'^blog/register/$', views.register, name='register'),
    url(r'^blog/profile/$', views.profile, name='profile'),
+   url(r'^bloggers/$', views.bloggers, name='bloggers'),
     
  
 ]

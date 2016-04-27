@@ -26,11 +26,12 @@ class UserForm(forms.ModelForm):
             email = self.cleaned_data["email"]
       
             user = User.objects.filter(email=email)
-            if user.exists():
-               
+            if user.exists():             
                raise forms.ValidationError("This email address already exists. Did you forget your password?")
             else:
+          
                return email
+            return email
         
 
   
