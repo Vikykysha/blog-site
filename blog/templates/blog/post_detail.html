@@ -1,15 +1,17 @@
  {% extends 'blog/base.html' %}
 
     {% block content %}
-        <div >
-           <div class="authoraze">
+       
+          
            <div class="date">
           {% if post.published_date %}
     {{ post.published_date }}
-           </div>
+           
 {% else %}
+              {% if request.user = post.author or user.is_superuser %}
     <a class="btn btn-default" href="{% url 'blog.views.post_publish' pk=post.pk %}">Publish</a>
 {% endif %}
+              {% endif %}
            </div>
            <div class="main-menu">
            {% if request.user = post.author or user.is_superuser %}
@@ -20,19 +22,19 @@
            {% endif %}
           <div class="includ-post">
                  <h1 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-                  <p>{{ post.author}}</a></p>
+                  <p>{{ post.author}}</p>
            <hr>
-              
-           <div class="pull-right bg-info" style="width: 20em; padding: 10px;">
-           <p> Tag: {{post.tags}} <p>
+              <div class="pull-right bg-info" style="width: 20em; padding: 10px;">
+           <p> Tag: {% for tags in post.tags.all %} {{tags}}  {%endfor%}  <p>
                <p> Category: {{ post.category}} <p>
            </div>
+           
             <p class="post-text">{{ post.text|linebreaks }}</p>
         </div>
 </div>
-           <div>
+           <div class="likecoment">
                       <p>
-
+<hr>
 <strong id="like_count">{{ post.likes }}</strong> people like this post
 {% if user.is_authenticated %}
              
@@ -78,6 +80,8 @@
     </div>
     {% endif %}
 {% empty %}
-    <p><span class=" glyphicon glyphicon-fire"></span>No comments here yet <span class=" glyphicon glyphicon-fire"></p>
+    <p><span class=" glyphicon glyphicon-fire"></span>No comments here yet <span class=" glyphicon glyphicon-fire"></span></p>
+              
+
 {% endfor %}
-    {% endblock %}
+{% endblock %} 

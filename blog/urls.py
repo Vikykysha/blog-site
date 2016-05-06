@@ -17,6 +17,7 @@ urlpatterns = [
    url(r'^bloggers/$', views.bloggers, name='bloggers'),
    url(r'^categories/$', views.categories, name='categories'),
    url(r'^post/(?P<pk>\d+)/like_category$', views.like_category, name='like_category'),
+   url(r'^tags/(?P<name>(\w+))/$', views.tag, name='tag'),
     
  
 ]

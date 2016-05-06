@@ -64,10 +64,7 @@ h1, h2, h3, h4 {
    float: right;
   
 }
-.authoraze {
-   margin-left:20px;
-}
-   
+ 
 .pull-right{
     color: black;
     font-size:13px;
@@ -116,7 +113,7 @@ strong + a {
    font-family: 'Indie Flower', cursive;
    color:#f08166;
    font-size:15px;
-   display:block;
+   
 }
 
 .glyphicon  {
@@ -159,7 +156,7 @@ td {
    text-align:center;
 }
 .main-menu {
-   margin:20px;
+   margin-top:20px;
 }
 .comments {
    margin-top:100px;
@@ -168,6 +165,16 @@ td {
    width:150px;
     
 }
+.likecoment {
+   float:left;
+}
+.left{
+   float:left;
+}
+.right {
+   float:lright;
+}
+   
    
    
    

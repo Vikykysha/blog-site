@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from .models import Post, Comment, UserProfile, Category
+from .models import Post, Comment, UserProfile, Category, Tag
 from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -46,12 +46,14 @@ def register(request):
             context)
    
 def profile(request):
+   tags = Tag.objects.all()
    user = request.user
    user_id  = user.id  
    profile = UserProfile.objects.get(user_id = user_id)
-   return render(request, 'blog/profile.html',{'profile':profile})
+   return render(request, 'blog/profile.html',{'profile':profile,'tags':tags})
 
 def bloggers(request):
+   tags = Tag.objects.all()
    users = User.objects.order_by('id')
    prof = UserProfile.objects.order_by('user_id')
    list = zip(users, prof)
@@ -63,7 +65,7 @@ def bloggers(request):
       users = paginator.page(1)
    except EmptyPage:
       users = paginator.page(paginator.num_pages)                               
-   return render(request,'blog/bloggers.html',{'users':users, 'prof':prof, 'list':list})
+   return render(request,'blog/bloggers.html',{'users':users, 'prof':prof, 'list':list,'tags':tags})
 
 @login_required
 def like_category(request,pk):
@@ -86,6 +88,7 @@ def like_category(request,pk):
     return redirect('blog.views.post_detail', pk=pk)
 
 def post_list(request):
+   tags = Tag.objects.all()
    posts = Post.objects.order_by('-created_date')
    paginator = Paginator(posts,60)
    page = request.GET.get('page')
@@ -95,16 +98,18 @@ def post_list(request):
       posts = paginator.page(1)
    except EmptyPage:
       posts = paginator.page(paginator.num_pages)                            
-   return render(request, 'blog/post_list.html', {'posts': posts})
+   return render(request, 'blog/post_list.html', {'posts': posts,'tags':tags})
 
       
 def post_detail(request, pk):
+    tags = Tag.objects.all()
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
+    return render(request, 'blog/post_detail.html', {'post': post,'tags':tags})
 
 def categories(request):
+   tags = Tag.objects.all()
    cats = Category.objects.order_by('name')
-   return render(request, 'blog/categories.html', {'cats':cats})
+   return render(request, 'blog/categories.html', {'cats':cats,'tags':tags})
 
 @login_required
 def post_new(request):
@@ -115,6 +120,7 @@ def post_new(request):
             post.author = request.user
             
             post.save()
+            form.save_m2m()
             return redirect('blog.views.post_detail', pk=post.pk)
     else:
         form = PostForm()
@@ -122,6 +128,7 @@ def post_new(request):
 
 @login_required
 def post_draft_list(request):
+   tags = Tag.objects.all()
    posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
    paginator = Paginator(posts,60)
    page = request.GET.get('page')
@@ -131,7 +138,7 @@ def post_draft_list(request):
       posts = paginator.page(1)
    except EmptyPage:
       posts = paginator.page(paginator.num_pages)                            
-   return render(request, 'blog/post_draft_list.html', {'posts': posts})
+   return render(request, 'blog/post_draft_list.html', {'posts': posts,'tags':tags})
 
 @login_required
 def post_publish(request, pk):
@@ -155,6 +162,7 @@ def post_edit(request, pk):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
+            form.save_m2m()
             return redirect('blog.views.post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
@@ -190,3 +198,12 @@ def comment_remove(request, pk):
     post_pk = comment.post.pk
     comment.delete()
     return redirect('blog.views.post_detail', pk=post_pk)
+
+
+def tag(request,name) :
+   
+   
+   tags = Tag.objects.all()
+   tag_s= Tag.objects.get(name=name)
+   posts= Post.objects.filter(tags__exact=tag_s)
+   return render(request, 'blog/tags.html',{'posts':posts,'tag':tag_s})

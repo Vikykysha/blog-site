@@ -29,15 +29,27 @@
           </div>
             <div class="col-sm-4">See other <a href="/bloggers/" class="options">bloggers</a></div>
             <div class="col-sm-4">See different <a href="/categories/" class="options">categories</a></div>
+    
              
         </div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8 ">
             {% block content %}
-            {% endblock %}
+            {% endblock %}                  
             </div>
-        </div>
+           
+               <div class="col-md-4 ">
+               {% for tag in tags%} 
+             
+    <a href="{% url 'tag' name=tag.name %}"> {{tag}}</a>
+                  
+                  {% if not forloop.last %}, {% endif%}
+                  {% endfor%}
+                
+               </div>
+        
     </div>
+   </div>
 </body>
     </html>
 

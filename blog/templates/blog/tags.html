@@ -1,0 +1,15 @@
+ {% extends 'blog/base.html' %}
+
+    {% block content %}
+<p> Посты к тегу {{tag}} </p>
+{% for post in posts %}
+<h6> Дата публикации: {{post.published_date }}</h6>
+<h4><a href="{% url 'post_detail' pk=post.pk %}"> {{post.title}} </a></h4>
+
+
+
+
+{% endfor %}
+
+
+{% endblock  %}

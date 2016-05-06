@@ -14,6 +14,13 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.user.username
 
+class Tag(models.Model):
+    
+    name = models.CharField(max_length=50)
+    
+    def __unicode__(self):
+        return self.name
+
 
 class Post(models.Model):
     
@@ -23,7 +30,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     published_date = models.DateTimeField(blank=True, null=True)
     category = models.ForeignKey ('Category',blank=True, null=True)
-    tags = models.ForeignKey('Tag',blank=True, null=True)
+    tags = models.ManyToManyField(Tag,related_name="tags",)
     likes  = models.BigIntegerField(blank = True, default = 0)
     addLike = models.IntegerField(default = 0)
 
@@ -43,11 +50,7 @@ class Category (models.Model):
     def __unicode__(self):
         return self.name
     
-class Tag(models.Model):
-    
-    name = models.CharField(max_length=50)
-    def __unicode__(self):
-        return self.name
+
    
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments')
