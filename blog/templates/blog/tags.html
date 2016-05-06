@@ -1,15 +1,24 @@
  {% extends 'blog/base.html' %}
 
     {% block content %}
-<p> Посты к тегу {{tag}} </p>
+
+  <table class="table table-hover table-condensed table-for-user-list">
+     <caption><p class="tag-p"> Posts include {{tag}} tag: </p></caption>
+ <thead>
+ <tr>
+ <th class="tag-th" >Published date</th>
+ <th class="tag-th" >Title</th>
+ </tr>
+ </thead>
 {% for post in posts %}
-<h6> Дата публикации: {{post.published_date }}</h6>
-<h4><a href="{% url 'post_detail' pk=post.pk %}"> {{post.title}} </a></h4>
-
-
-
-
+          
+ <tbody>
+ <tr>
+ <td class="tag-th" >{{post.published_date }}</td>
+ <td class="tag-th" ><a class="cloud-link" href="{% url 'post_detail' pk=post.pk %}"> {{post.title}} </a></td>
+ </tr>
+ </tbody>
 {% endfor %}
-
+</table>
 
 {% endblock  %}

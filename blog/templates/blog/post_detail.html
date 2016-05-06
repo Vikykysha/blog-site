@@ -4,84 +4,76 @@
        
           
            <div class="date">
-          {% if post.published_date %}
-    {{ post.published_date }}
+                    {% if post.published_date %}
+                         {{ post.published_date }}
            
-{% else %}
-              {% if request.user = post.author or user.is_superuser %}
-    <a class="btn btn-default" href="{% url 'blog.views.post_publish' pk=post.pk %}">Publish</a>
-{% endif %}
-              {% endif %}
+                    {% else %}
+                       {% if request.user = post.author or user.is_superuser %}
+                                 <a class="btn btn-default" href="{% url 'blog.views.post_publish' pk=post.pk %}">Publish</a>
+                        {% endif %}
+                    {% endif %}
            </div>
+
+
            <div class="main-menu">
-           {% if request.user = post.author or user.is_superuser %}
+               {% if request.user = post.author or user.is_superuser %}
               
-           <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-           <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                    <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                     <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
            
-           {% endif %}
-          <div class="includ-post">
-                 <h1 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+               {% endif %}
+             <div class="includ-post">
+                  <h1 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
                   <p>{{ post.author}}</p>
-           <hr>
-              <div class="pull-right bg-info" style="width: 20em; padding: 10px;">
-           <p> Tag: {% for tags in post.tags.all %} {{tags}}  {%endfor%}  <p>
-               <p> Category: {{ post.category}} <p>
+                  <hr>
+                  <div class="pull-right bg-info" style="width: 20em; padding: 10px;">
+                    <p> Tag: {% for tags in post.tags.all %} {{tags}}  {%endfor%}  <p>
+                    <p> Category: {{ post.category}} <p>
+                  </div>           
+                   <p class="post-text">{{ post.text|linebreaks }}</p>
+             </div>
            </div>
-           
-            <p class="post-text">{{ post.text|linebreaks }}</p>
-        </div>
-</div>
            <div class="likecoment">
-                      <p>
-<hr>
-<strong id="like_count">{{ post.likes }}</strong> people like this post
-{% if user.is_authenticated %}
+                        <p></p>
+                      <hr>
+                    <strong id="like_count">{{ post.likes }}</strong> people like this post
+                    {% if user.is_authenticated %}
              
-        {% if not post.addLike%}    
-<a class="btn btn-default" id = "likes" href="{% url 'like_category' pk=post.pk %}">
-       
-        <span class="glyphicon glyphicon-thumbs-up"></span>
-        Like
-  
-        
-</a>
-             <p>
-                {% else %}
+                        {% if not post.addLike%}    
+                          <a class="btn btn-default" id = "likes" href="{% url 'like_category' pk=post.pk %}"><span class="glyphicon glyphicon-thumbs-up"></span> Like </a>
+                         <p></p>
+                         {% else %}
            
-{% endif %}
-                {% endif %}
+                         {% endif %}
+                     {% endif %}
 
-<div class = "comments">
-<a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+                  <div class = "comments">
+                          <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
 
-<br>
-   <br>
-   <br>
-{% for comment in post.comments.all %}
-</div>
-    {% if user.is_authenticated or comment.approved_comment %}
-    <div>
+                         <br>
+                        <br>
+                      <br>
+                      {% for comment in post.comments.all %}
+                   </div>
+                   {% if user.is_authenticated or comment.approved_comment %}
+                  <div>
        
-        <div>
-           
-        
-         
-            {% if not comment.approved_comment %}
-                <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
-            {% endif %}
-        </div>
-       <div class="comment-content">
-        <strong>{{ comment.author }}</strong>
-           <br><small>{{ comment.created_date_on}}</small>
-        <p id = "comment-text">{{ comment.text|linebreaks }}</p>
-       </div>
-    </div>
-    {% endif %}
-{% empty %}
-    <p><span class=" glyphicon glyphicon-fire"></span>No comments here yet <span class=" glyphicon glyphicon-fire"></span></p>
-              
+                     <div>            
+                      {% if not comment.approved_comment %}
+                         <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                      {% endif %}
+                     </div>
+                     <div class="comment-content">
+                        <strong>{{ comment.author }}</strong>
+                        <br><small>{{ comment.created_date_on}}</small>
+                        <p id = "comment-text">{{ comment.text|linebreaks }}</p>
+                      </div>
+                 </div>
+                        {% endif %}                     
+                  <p><span class=" glyphicon glyphicon-fire"></span>No comments here yet <span class=" glyphicon glyphicon-fire"></span></p>
+                   </div>    
+
 
 {% endfor %}
 {% endblock %} 

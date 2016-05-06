@@ -39,13 +39,15 @@
             </div>
            
                <div class="col-md-4 ">
+                  <div class="cloud-tag">
+                 <h3 class="cloud-h3">Облако тегов</h3>
                {% for tag in tags%} 
              
-    <a href="{% url 'tag' name=tag.name %}"> {{tag}}</a>
+    <a class= "cloud-link" href="{% url 'tag' name=tag.name %}"> {{tag}}</a>
                   
                   {% if not forloop.last %}, {% endif%}
                   {% endfor%}
-                
+                  </div>
                </div>
         
     </div>
