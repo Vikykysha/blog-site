@@ -46,6 +46,32 @@
            
                          {% endif %}
                      {% endif %}
+                 <div class="social-likes" data-title="title">
+	                       <div class="facebook" title="Поделиться ссылкой на Фейсбуке">Facebook</div>
+	                       <div class="twitter" title="Поделиться ссылкой в Твиттере">Twitter</div>
+	                        <div class="mailru" title="Поделиться ссылкой в Моём мире">Мой мир</div>
+	                       <div class="vkontakte" title="Поделиться ссылкой во Вконтакте">Вконтакте</div>
+	                       <div class="odnoklassniki" title="Поделиться ссылкой в Одноклассниках">Одноклассники</div>
+	                      <div class="plusone" title="Поделиться ссылкой в Гугл-плюсе">Google+</div>
+                   </div>
+              
+           
+              <input class="awesomplete" list="mylist" />
+<datalist id="mylist">
+	<option>Ada</option>
+	<option>Java</option>
+	<option>JavaScript</option>
+	<option>Brainfuck</option>
+	<option>LOLCODE</option>
+	<option>Node.js</option>
+	<option>Ruby on Rails</option>
+</datalist>
+              
+              
+              
+              
+              
+              
 
                   <div class = "comments">
                           <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>

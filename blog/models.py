@@ -30,7 +30,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     published_date = models.DateTimeField(blank=True, null=True)
     category = models.ForeignKey ('Category',blank=True, null=True)
-    tags = models.ManyToManyField(Tag,related_name="tags",)
+    tags = models.ManyToManyField(Tag,related_name="tags",blank=True)
     likes  = models.BigIntegerField(blank = True, default = 0)
     addLike = models.IntegerField(default = 0)
 

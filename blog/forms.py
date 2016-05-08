@@ -1,15 +1,20 @@
 from django import forms
 from .models import Post, Comment, Tag
 from django.contrib.auth.models import User
-from blog.models import UserProfile
+from blog.models import UserProfile, Category
 from django.contrib.auth.models import User
 
-class PostForm(forms.ModelForm):
+class PostForm(forms.Form):
 
-    class Meta:
-        model = Post
-        fields = ('title', 'text', 'category','tags')
+   
+    title = forms.CharField(label="Title of the post",max_length=100)
+    text= forms.CharField(label="Text of your post")
+    category = forms.ModelChoiceField(label="Select category",queryset=Category.objects.all(),required=False)
+    tags = forms.CharField(label="Select or add your tag",widget=forms.TextInput,required=False)
     
+    
+      
+   
   
 
 class CommentForm(forms.ModelForm):

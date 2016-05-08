@@ -116,11 +116,24 @@ def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            
-            post.save()
-            form.save_m2m()
+            if form.cleaned_data["tags"]: 
+               ta = Tag.objects.filter(name=form.cleaned_data["tags"])
+               if ta.exists():
+                  ta = Tag.objects.get(name=form.cleaned_data["tags"])
+                  ta.save()
+                  post=Post.objects.create(author = request.user,title=form.cleaned_data["title"],text=form.cleaned_data["text"],category=form.cleaned_data["category"])
+                  post.save()
+                  post.tags.add(ta)
+               else:  
+                  t=Tag.objects.create(name=form.cleaned_data["tags"])
+                  t.save()
+                  post=Post.objects.create(author = request.user,title=form.cleaned_data["title"],text=form.cleaned_data["text"],category=form.cleaned_data["category"])
+                  post.save()
+                  post.tags.add(t)
+                
+            else:
+               post=Post.objects.create(author = request.user,title=form.cleaned_data["title"],text=form.cleaned_data["text"],category=form.cleaned_data["category"])
+        
             return redirect('blog.views.post_detail', pk=post.pk)
     else:
         form = PostForm()
@@ -206,4 +219,12 @@ def tag(request,name) :
    tags = Tag.objects.all()
    tag_s= Tag.objects.get(name=name)
    posts= Post.objects.filter(tags__exact=tag_s)
-   return render(request, 'blog/tags.html',{'posts':posts,'tag':tag_s})
+   paginator = Paginator(posts,60)
+   page = request.GET.get('page')
+   try:
+      posts = paginator.page(page)
+   except InvalidPage:
+      posts = paginator.page(1)
+   except EmptyPage:
+      posts = paginator.page(paginator.num_pages)                    
+   return render(request, 'blog/tags.html',{'posts':posts,'tag':tag_s,'tags':tags})
