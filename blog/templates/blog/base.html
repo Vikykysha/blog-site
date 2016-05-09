@@ -60,17 +60,20 @@
     </div>
    </div>
    
+   
    <script src="../../static/js/jquery.js" ></script>
    <script src="../../static/js/social-likes.min.js" ></script>
    <script src="../../static/js/awesomplete.js" ></script>
-   <script src="../../static/js/completer.js" ></script>
+   <script src="../../static/js/awesomplete.js" ></script>
       <script src="./../static/js/script.js" ></script>
     <script>
-   $("#completer").completer({
+   var input = document.getElementById("myinput");
+   new Awesomplete(input, {
+	list: ['sdf', 'quqa']
 
-  source: ["ha","ho"]
 });
    
+
 </script>
    
 </body>
