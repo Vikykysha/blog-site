@@ -17,6 +17,8 @@ class UserProfile(models.Model):
 class Tag(models.Model):
     
     name = models.CharField(max_length=50)
+    important = models.BooleanField(default=False) 
+         
     
     def __unicode__(self):
         return self.name

@@ -55,31 +55,15 @@
 	                      <div class="plusone" title="Поделиться ссылкой в Гугл-плюсе">Google+</div>
                    </div>
               
-           
-              <input class="awesomplete" list="mylist" />
-<datalist id="mylist">
-	<option>Ada</option>
-	<option>Java</option>
-	<option>JavaScript</option>
-	<option>Brainfuck</option>
-	<option>LOLCODE</option>
-	<option>Node.js</option>
-	<option>Ruby on Rails</option>
-</datalist>
-              
-              
-              
-              
-              
-              
 
-                  <div class = "comments">
+
+       <div class = "comments">
                           <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
 
                          <br>
+                         <br>
                         <br>
-                      <br>
-                      {% for comment in post.comments.all %}
+                         {% for comment in post.comments.all %}
                    </div>
                    {% if user.is_authenticated or comment.approved_comment %}
                   <div>
@@ -98,7 +82,10 @@
                  </div>
                         {% endif %}                     
                   <p><span class=" glyphicon glyphicon-fire"></span>No comments here yet <span class=" glyphicon glyphicon-fire"></span></p>
-                   </div>    
+     </div>   
+
+
+
 
 
 {% endfor %}

@@ -5,8 +5,8 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href="../../static/css/social-likes_classic.css" rel="stylesheet">
-     <link href="../../static/css/fotorama.css" rel="stylesheet">
      <link href="../../static/css/awesomplete.css" rel="stylesheet">
+     <link href="../../static/css/completer.css" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
       <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
      <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
@@ -44,34 +44,34 @@
                <div class="col-md-4 ">
                   <div class="cloud-tag">
                  <h3 class="cloud-h3">Облако тегов</h3>
+                 
                {% for tag in tags%} 
-             
-    <a class= "cloud-link" href="{% url 'tag' name=tag.name %}"> {{tag}}</a>
+                
+    <a class= "cloud-link" href="{% url 'tag' name=tag.name %}"> 
+ 
+       {{tag}} </a>
                   
                   {% if not forloop.last %}, {% endif%}
-                  {% endfor%}
-                     
-                     <div class="fotorama">
-                              <img src="http://s.fotorama.io/1.jpg">
-                              <img src="http://s.fotorama.io/2.jpg">
-                        <img src="../../static/img/1280.jpeg" >
-                        <img src="../../static/img/1280x.jpeg" >
-                        <img src="../../static/img/center.jpeg" >
-                     </div>
-                     
-                     
-                     
+                  {% endfor%} 
                      
                   </div>
                </div>
         
     </div>
    </div>
+   
    <script src="../../static/js/jquery.js" ></script>
    <script src="../../static/js/social-likes.min.js" ></script>
-   <script src="../../static/js/fotorama.js" ></script>
    <script src="../../static/js/awesomplete.js" ></script>
+   <script src="../../static/js/completer.js" ></script>
       <script src="./../static/js/script.js" ></script>
+    <script>
+   $("#completer").completer({
+
+  source: ["ha","ho"]
+});
+   
+</script>
    
 </body>
     </html>

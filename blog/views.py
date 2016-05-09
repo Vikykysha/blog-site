@@ -12,7 +12,19 @@ from django.template import RequestContext
 from django.contrib.auth.models import User
 
 def register(request):
+    tagss = Tag.objects.all()
+    posts = Post.objects.order_by('-created_date')
+   
+    for tag in tagss:
+       q = Post.objects.filter(tags=tag)
+       z = q.count()>2
+       if z:
+          x=True
+          tag.important=x
+          tag.save()
+    tags=Tag.objects.filter(important=True)
     # Like before, get the request's context.
+    
     context = RequestContext(request)
 
     # A boolean value for telling the template whether the registration was successful.
@@ -42,18 +54,38 @@ def register(request):
         profile_form = UserProfileForm()
     return render_to_response(
             'blog/register.html',
-            {'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
+            {'user_form': user_form, 'profile_form': profile_form, 'registered': registered,'tags':tags},
             context)
    
 def profile(request):
-   tags = Tag.objects.all()
+   tagss = Tag.objects.all()
+   posts = Post.objects.order_by('-created_date')
+   
+   for tag in tagss:
+      q = Post.objects.filter(tags=tag)
+      z = q.count()>2
+      if z:
+         x=True
+         tag.important=x
+         tag.save()
+   tags=Tag.objects.filter(important=True)
    user = request.user
    user_id  = user.id  
    profile = UserProfile.objects.get(user_id = user_id)
    return render(request, 'blog/profile.html',{'profile':profile,'tags':tags})
 
 def bloggers(request):
-   tags = Tag.objects.all()
+   tagss = Tag.objects.all()
+   posts = Post.objects.order_by('-created_date')
+   
+   for tag in tagss:
+      q = Post.objects.filter(tags=tag)
+      z = q.count()>2
+      if z:
+         x=True
+         tag.important=x
+         tag.save()
+   tags=Tag.objects.filter(important=True)
    users = User.objects.order_by('id')
    prof = UserProfile.objects.order_by('user_id')
    list = zip(users, prof)
@@ -88,8 +120,17 @@ def like_category(request,pk):
     return redirect('blog.views.post_detail', pk=pk)
 
 def post_list(request):
-   tags = Tag.objects.all()
+   tagss = Tag.objects.all()
    posts = Post.objects.order_by('-created_date')
+   
+   for tag in tagss:
+      q = Post.objects.filter(tags=tag)
+      z = q.count()>2
+      if z:
+         x=True
+         tag.important=x
+         tag.save()
+   tags=Tag.objects.filter(important=True)
    paginator = Paginator(posts,60)
    page = request.GET.get('page')
    try:
@@ -102,17 +143,48 @@ def post_list(request):
 
       
 def post_detail(request, pk):
-    tags = Tag.objects.all()
+    tagss = Tag.objects.all()
+    posts = Post.objects.order_by('-created_date')
+   
+    for tag in tagss:
+       q = Post.objects.filter(tags=tag)
+       z = q.count()>2
+       if z:
+          x=True
+          tag.important=x
+          tag.save()
+    tags=Tag.objects.filter(important=True)
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post,'tags':tags})
 
 def categories(request):
-   tags = Tag.objects.all()
+   tagss = Tag.objects.all()
+   posts = Post.objects.order_by('-created_date')
+   
+   for tag in tagss:
+      q = Post.objects.filter(tags=tag)
+      z = q.count()>2
+      if z:
+         x=True
+         tag.important=x
+         tag.save()
+   tags=Tag.objects.filter(important=True)
    cats = Category.objects.order_by('name')
    return render(request, 'blog/categories.html', {'cats':cats,'tags':tags})
 
 @login_required
 def post_new(request):
+    tagss = Tag.objects.all()
+    posts = Post.objects.order_by('-created_date')
+   
+    for tag in tagss:
+      q = Post.objects.filter(tags=tag)
+      z = q.count()>2
+      if z:
+         x=True
+         tag.important=x
+         tag.save()
+    tags=Tag.objects.filter(important=True)
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
@@ -137,11 +209,21 @@ def post_new(request):
             return redirect('blog.views.post_detail', pk=post.pk)
     else:
         form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_edit.html', {'form': form,'tags':tags})
 
 @login_required
 def post_draft_list(request):
-   tags = Tag.objects.all()
+   tagss = Tag.objects.all()
+   posts = Post.objects.order_by('-created_date')
+   
+   for tag in tagss:
+      q = Post.objects.filter(tags=tag)
+      z = q.count()>2
+      if z:
+         x=True
+         tag.important=x
+         tag.save()
+   tags=Tag.objects.filter(important=True)
    posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
    paginator = Paginator(posts,60)
    page = request.GET.get('page')
@@ -167,6 +249,17 @@ def post_remove(request, pk):
 
 @login_required
 def post_edit(request, pk):
+    tagss = Tag.objects.all()
+    posts = Post.objects.order_by('-created_date')
+   
+    for tag in tagss:
+       q = Post.objects.filter(tags=tag)
+       z = q.count()>2
+       if z:
+          x=True
+          tag.important=x
+          tag.save()
+    tags=Tag.objects.filter(important=True)
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
@@ -179,9 +272,20 @@ def post_edit(request, pk):
             return redirect('blog.views.post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_edit.html', {'form': form,'tags':tags})
 
 def add_comment_to_post(request, pk):
+    tagss = Tag.objects.all()
+    posts = Post.objects.order_by('-created_date')
+   
+    for tag in tagss:
+       q = Post.objects.filter(tags=tag)
+       z = q.count()>2
+       if z:
+          x=True
+          tag.important=x
+          tag.save()
+    tags=Tag.objects.filter(important=True)
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -193,7 +297,7 @@ def add_comment_to_post(request, pk):
             return redirect('blog.views.post_detail', pk=post.pk)
     else:
         form = CommentForm()
-    return render(request, 'blog/add_comment_to_post.html', {'form': form})
+    return render(request, 'blog/add_comment_to_post.html', {'form': form,'tags':tags})
 
 
 
