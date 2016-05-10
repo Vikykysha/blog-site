@@ -67,12 +67,20 @@
    <script src="../../static/js/awesomplete.js" ></script>
       <script src="./../static/js/script.js" ></script>
     <script>
-   var input = document.getElementById("myinput");
-   new Awesomplete(input, {
-	list: ['sdf', 'quqa']
+       $("#myinput").click(function(){
+    $.getJSON("/tag_json/", function(result){
+        
+   new Awesomplete(document.querySelector("#myinput"), {
+	list: result
+    });    
+        
+        });
+       });
 
-});
-   
+
+
+
+
 
 </script>
    

@@ -10,6 +10,16 @@ from blog.forms import UserForm, UserProfileForm
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.models import User
+from django.core import serializers
+from django.http import HttpResponse
+import json
+
+def tag_json(request):
+    tag = list(Tag.objects.values_list('name', flat=True))
+    
+    
+
+    return HttpResponse(json.dumps(tag),  content_type="application/json")
 
 def register(request):
     tagss = Tag.objects.all()

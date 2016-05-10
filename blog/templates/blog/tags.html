@@ -14,7 +14,11 @@
           
  <tbody>
  <tr>
- <td class="tag-th" >{{post.published_date }}</td>
+ <td class="tag-th" >{% if not post.published_date %} 
+    Post is not published yet 
+    {%else %} 
+    {{post.published_date }} 
+    {% endif %}</td>
  <td class="tag-th" ><a class="cloud-link" href="{% url 'post_detail' pk=post.pk %}"> {{post.title}} </a></td>
  </tr>
  </tbody>
