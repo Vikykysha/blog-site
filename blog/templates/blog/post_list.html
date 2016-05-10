@@ -14,7 +14,9 @@
             <p class="post-text">{{ post.text|linebreaks }}</p>
             <a href="{% url 'blog.views.post_detail' pk=post.pk %}">Comments: {{ post.approved_comment.count }}</a>
           <p class = "category"> Category: {{ post.category}} <p>
-            <p class = "tag"> Tag: {% for tags in post.tags.all %} {{tags}}  {%endfor%}  <p>      
+            <p class = "tag"> Tag: {% for tags in post.tags.all %} {{tags}}  {%endfor%}  <p>  
+           <br>
+            Views: {{post.glance}} 
         </div>
 {% endfor %}
         <div class="pagination">
