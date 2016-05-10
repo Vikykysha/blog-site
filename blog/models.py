@@ -35,6 +35,7 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag,related_name="tags",blank=True)
     likes  = models.BigIntegerField(blank = True, default = 0)
     addLike = models.IntegerField(default = 0)
+    glance = models.BigIntegerField(blank = True, default = 0)
 
     def approved_comment (self):
         return self.comments.filter(approved_comment = True)

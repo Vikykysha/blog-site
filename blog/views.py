@@ -165,6 +165,9 @@ def post_detail(request, pk):
           tag.save()
     tags=Tag.objects.filter(important=True)
     post = get_object_or_404(Post, pk=pk)
+    gl = post.glance + 1
+    post.glance = gl
+    post.save()
     return render(request, 'blog/post_detail.html', {'post': post,'tags':tags})
 
 def categories(request):
