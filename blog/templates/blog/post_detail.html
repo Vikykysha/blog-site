@@ -36,16 +36,41 @@
            <div class="likecoment">
                         <p></p>
                       <hr>
-                    <strong id="like_count">{{ post.likes }}</strong> people like this post
+                    <strong id="like_count">{{ post.likes }}</strong> people like this post       
                     {% if user.is_authenticated %}
              
-                        {% if not post.addLike%}    
-                          <a class="btn btn-default" id = "likes" href="{% url 'like_category' pk=post.pk %}"><span class="glyphicon glyphicon-thumbs-up"></span> Like </a>
-                    and <strong id="like_count">{{post.glance}}  </strong>  see this post   <p></p>
-                         {% else %}
-           
-                         {% endif %}
+                       <button id="likes" data-catid="{{post.pk}}" class="btn btn-default" type="button">
+        <span class=" glyphicon glyphicon-thumbs-up"></span>
+        Like
+        </button>
+               <a id="downl" data-catid="{{post.pk}}" >
+       
+        ResetLike
+        </a>
                      {% endif %}  
+              <p></p>
+              <strong id="dislike_count">{{ post.dislikes }}</strong> people dislike this cpost
+
+{% if user.is_authenticated %}
+        <button id="dislikes" data-catid="{{post.pk}}" class="btn btn-default" type="button">
+        <span class=" glyphicon glyphicon-thumbs-down"></span>
+        Dislike
+        </button>
+              <a id="down" data-catid="{{post.pk}}" >
+       
+        ResetDislikes
+        </a>
+{% endif %}
+              <p></p>
+ and <strong id="like_count">{{post.glance}}  </strong>  see this post 
+              
+               
+
+
+              
+              
+              <br>
+              <br>
                  <div class="social-likes" data-title="title">
 	                       <div class="facebook" title="Поделиться ссылкой на Фейсбуке">Facebook</div>
 	                       <div class="twitter" title="Поделиться ссылкой в Твиттере">Twitter</div>
@@ -54,7 +79,11 @@
 	                       <div class="odnoklassniki" title="Поделиться ссылкой в Одноклассниках">Одноклассники</div>
 	                      <div class="plusone" title="Поделиться ссылкой в Гугл-плюсе">Google+</div>
                    </div>
-              
+              <p>
+
+
+</p>
+             
 
 
        <div class = "comments">

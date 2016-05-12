@@ -110,24 +110,77 @@ def bloggers(request):
    return render(request,'blog/bloggers.html',{'users':users, 'prof':prof, 'list':list,'tags':tags})
 
 @login_required
-def like_category(request,pk):
-   
-    post = get_object_or_404(Post, pk=pk)
+def like_category(request):
+
+    pk = None
     if request.method == 'GET':
-        post_pk = post.pk
-        post_p = post.addLike
-    likes = 0
-    if post_pk and (post_p==0):
-        post = Post.objects.get(pk=(int(post_pk)))
+        pk = request.GET['post_pk']
+
+    
+    if pk:
+        post = Post.objects.get(pk=(int(pk)))
         if post:
             likes = post.likes + 1
             post.likes =  likes
-            l = post.addLike + 1
-            post.addLike = l
             post.save()
-            
 
-    return redirect('blog.views.post_detail', pk=pk)
+    return HttpResponse(likes)
+
+
+
+@login_required
+def dislike_category(request):
+
+    pk = None
+    if request.method == 'GET':
+        pk = request.GET['post_pk']
+
+    
+    if pk:
+        post = Post.objects.get(pk=(int(pk)))
+        if post:
+            dislikes = post.dislikes + 1
+            post.dislikes =  dislikes
+            post.save()
+
+    return HttpResponse(dislikes)
+
+@login_required
+def down(request):
+
+    pk = None
+    if request.method == 'GET':
+        pk = request.GET['post_pk']
+
+    
+    if pk:
+        post = Post.objects.get(pk=(int(pk)))
+        if post:
+            dislikes = post.dislikes - 1
+            post.dislikes =  dislikes
+            post.save()
+
+    return HttpResponse(dislikes)
+@login_required
+def downl(request):
+
+    pk = None
+    if request.method == 'GET':
+        pk = request.GET['post_pk']
+
+    
+    if pk:
+        post = Post.objects.get(pk=(int(pk)))
+        if post:
+            likes = post.likes - 1
+            post.likes =  likes
+            post.save()
+
+    return HttpResponse(likes)
+
+
+
+
 
 def post_list(request):
    tagss = Tag.objects.all()

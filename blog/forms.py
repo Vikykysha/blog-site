@@ -8,7 +8,7 @@ class PostForm(forms.Form):
 
    
     title = forms.CharField(label="Title of the post",max_length=100)
-    text= forms.CharField(label="Text of your post")
+    text= forms.CharField(label="Text of your post",widget=forms.Textarea)
     category = forms.ModelChoiceField(label="Select category",queryset=Category.objects.all(),required=False)
     tags = forms.CharField(label="Select or add your tag",widget=forms.TextInput(attrs={'id':'myinput'}),required=False)
     

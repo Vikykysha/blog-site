@@ -16,7 +16,10 @@ urlpatterns = [
    url(r'^blog/profile/$', views.profile, name='profile'),
    url(r'^bloggers/$', views.bloggers, name='bloggers'),
    url(r'^categories/$', views.categories, name='categories'),
-   url(r'^post/(?P<pk>\d+)/like_category$', views.like_category, name='like_category'),
+   url(r'^like_category/$', views.like_category, name='like_category'),
+   url(r'^dislike_category/$', views.dislike_category, name='dislike_category'),
+   url(r'^down/$', views.down, name='down'),
+   url(r'^downl/$', views.downl, name='downl'),
    url(r'^tags/(?P<name>(\w+))/$', views.tag, name='tag'),
    url(r'^tag_json/$', views.tag_json, name='tag_json'),
     

@@ -10,6 +10,8 @@ class UserProfile(models.Model):
     website = models.URLField(blank=True, null=True)
     
     hobby = models.CharField(blank=True, null=True, max_length=200)
+    had_like = models.BooleanField(default=False) 
+    had_dislike = models.BooleanField(default=False) 
     
     def __unicode__(self):
         return self.user.username
@@ -34,6 +36,7 @@ class Post(models.Model):
     category = models.ForeignKey ('Category',blank=True, null=True)
     tags = models.ManyToManyField(Tag,related_name="tags",blank=True)
     likes  = models.BigIntegerField(blank = True, default = 0)
+    dislikes  = models.BigIntegerField(blank = True, default = 0)  
     addLike = models.IntegerField(default = 0)
     glance = models.BigIntegerField(blank = True, default = 0)
 

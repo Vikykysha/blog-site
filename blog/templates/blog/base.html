@@ -67,6 +67,7 @@
    <script src="../../static/js/awesomplete.js" ></script>
       <script src="./../static/js/script.js" ></script>
     <script>
+     
        $("#myinput").click(function(){
     $.getJSON("/tag_json/", function(result){
         
@@ -76,7 +77,48 @@
         
         });
        });
+       
+$('#likes').click(function(){
+    var catid;
+    catid = $(this).attr("data-catid");
+    $.get('/like_category/', {post_pk: catid}, function(data){
+               $('#like_count').html(data);
+               $('#likes').hide();
+               $('#dislikes').hide();
+               $('#downl').show()
+    });
+});
 
+$('#dislikes').click(function(){
+    var catid;
+    catid = $(this).attr("data-catid");
+    $.get('/dislike_category/', {post_pk: catid}, function(data){
+               $('#dislike_count').html(data);
+               $('#dislikes').hide();
+               $('#likes').hide();
+               $('#down').show()
+    });
+});
+       $('#down').click(function(){
+    var catid;
+    catid = $(this).attr("data-catid");
+    $.get('/down/', {post_pk: catid}, function(data){
+               $('#dislike_count').html(data);
+               $('#down').hide();
+               $('#dislikes').show();
+               $('#likes').show();
+    });
+});
+       $('#downl').click(function(){
+    var catid;
+    catid = $(this).attr("data-catid");
+    $.get('/downl/', {post_pk: catid}, function(data){
+               $('#like_count').html(data);
+               $('#downl').hide();
+               $('#dislikes').show();
+               $('#likes').show();
+    });
+});
 
 
 
